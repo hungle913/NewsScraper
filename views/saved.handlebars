@@ -6,7 +6,7 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="/">Home</a></li>
         <li><a href="/saved">Saved Articles</a></li>
-        <li><a class="waves-effect waves-light btn-large">CLEAR ARTICLES!</a></li>
+        <li><a class="waves-effect waves-light btn-large clearArticles">CLEAR ARTICLES!</a></li>
       </ul>
     </div>
   </nav>
@@ -19,20 +19,21 @@
                 <p>{{this.text}}</p>
             </div>
             <div class="card-action">
-                <button id="saveArticle" class="btn btn-danger float-right delete">DELETE FROM SAVED</button>
+                <button id="deleteArticle" class="btn btn-danger float-right delete">DELETE FROM SAVED</button>
                 <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
 
                 <!-- Modal Structure -->
-                <div id="modal1" class="modal">
+                <div class="modal">
                     {{#each notes}}
                         <div class="modal-content">
                             <h4>Notes For Article: {{this.title}}</h4>
                             <p>{{this.notes}}</p>
+                            <button id="deleteNote" class="btn btn-danger float-right delete">Save Note</button>
                         </div>
                     {{/each}}
                     <textarea placeholder="New Note" rows="4" cols="60"></textarea>
                     <div class="modal-footer">
-                        <button id="saveArticle" class="btn btn-danger float-right delete">Save Note</button>
+                        <button id="saveNote" class="btn btn-danger float-right delete">Save Note</button>
                     </div>
                 </div>
             </div>

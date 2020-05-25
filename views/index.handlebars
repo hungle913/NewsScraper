@@ -6,22 +6,23 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="/">Home</a></li>
         <li><a href="/saved">Saved Articles</a></li>
-        <li><a class="waves-effect waves-light btn-large">SCRAPE NEW ARTICLES!</a></li>
-        <li><a class="waves-effect waves-light btn-large">CLEAR ARTICLES!</a></li>
+        <li><a id="scrapeArticles" class="waves-effect waves-light btn-large">SCRAPE NEW ARTICLES!</a></li>
+        <li><a class="waves-effect waves-light btn-large clearArticles">CLEAR ARTICLES!</a></li>
       </ul>
     </div>
   </nav>
   <div class="row">
-    <div class="col s12 m6">
+    <div class="col s12">
       <div class="card blue-grey darken-1">
         {{#each article}}
             <div class="card-content white-text">
-                <span data-id="{{this.id}}" class="list-new-article card-title"><a>{{this.title}}</a></span>
-                <p>{{this.text}}</p>
+                <span data-id="{{this.id}}" class="list-new-article card-title"><a href='{{this.link}}' target="_blank">{{this.title}}</a></span>
+                <p>{{this.summary}}</p>
             </div>
             <div class="card-action">
                 <button id="saveArticle" class="btn btn-danger float-right delete">Save Article</button>
             </div>
+            <hr>
         {{/each}}
       </div>
     </div>
