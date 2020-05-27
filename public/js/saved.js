@@ -9,10 +9,20 @@ $(document).ready(function() {
 		// Run a POST request to update the article to be saved
 	  $.ajax({
 	    method: "POST",
-	    url: "/delete/" + articleID,
+	    url: "/unSave/" + articleID,
 	    data: {
 	      saved: false
 	    }
+	  })
+	  location.reload(true);
+	});
+
+	// Clear all Saved button will removed any articles saved. 
+	$(document).on("click", ".clearSaved", function() {
+		//run 
+	  $.ajax({
+		url: "/clearSaved",
+		method: 'DELETE',
 	  })
 	  location.reload(true);
 	});

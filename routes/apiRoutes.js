@@ -52,10 +52,10 @@ module.exports = function(app) {
         });
     });
 
-    //delete articles
-    app.post("/delete/:id", function(req, res) {
+    //unsave articles
+    app.post("/unSave/:id", function(req, res) {
         // Use the article id to find and update it's saved property to false
-        db.Article.delete({ "_id": req.params.id }, { "saved": false, "notes": [] })
+        db.Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": false, "notes": [] })
         // Execute the above query
         .exec(function(err, doc) {
             // Log any errors
@@ -64,22 +64,43 @@ module.exports = function(app) {
             }
             // Log result
             else {
-                console.log("Saved: ", doc);
+                console.log("Deleted: ", doc);
             }
         });
     });
 
     //clear unsaved articles
-    app.get('/clear', function(req, res) {
-        db.Article.remove({ saved: false}, function(err, doc) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('removed');
-            }
-    
+    app.delete("/clearUnsaved", function(req, res) {
+        // Use the article id to find and update it's saved property to true
+        db.Article.deleteMany({ "saved": false })
+        // Execute the above query
+        .exec(function(err, doc) {
+          // Log any errors
+          if (err) {
+            console.log(err);
+          }
+          // Log result
+          else {
+            console.log("cleared");
+          }
         });
-        res.redirect('/');
+    });
+
+    //clear Saved articles
+    app.delete("/clearSaved", function(req, res) {
+        // Use the article id to find and update it's saved property to true
+        db.Article.deleteMany({ "saved": true })
+        // Execute the above query
+        .exec(function(err, doc) {
+          // Log any errors
+          if (err) {
+            console.log(err);
+          }
+          // Log result
+          else {
+            console.log("cleared");
+          }
+        });
     });
       
 }

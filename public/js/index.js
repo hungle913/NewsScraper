@@ -17,5 +17,17 @@ $(document).ready(function() {
 	  location.reload(true);
 	});
 
+	// Clear all unsaved button will removed any articles not saved. 
+	$(document).on("click", ".clearUnsaved", function() {
+		//run 
+	  $.ajax({
+		url: "/clearUnsaved",
+		method: 'DELETE',
+	  })
+	  location.reload(true);
+	});
+
+
+
 
 });
