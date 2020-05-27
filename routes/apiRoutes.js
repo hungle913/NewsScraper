@@ -3,6 +3,8 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 module.exports = function(app) {
+
+    //scrape all articles and load to page
     app.get("/scrape", function(req, res) {
         // First, we grab the body of the html with axios
         axios.get("https://www.npr.org/sections/news/").then(function(response) {
@@ -33,6 +35,7 @@ module.exports = function(app) {
         });
     });
 
+    //save articles
     app.post("/save/:id", function(req, res) {
         // Use the article id to find and update it's saved property to true
         db.Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true })
@@ -47,6 +50,36 @@ module.exports = function(app) {
             console.log("Saved: ", doc);
           }
         });
+    });
+
+    //delete articles
+    app.post("/delete/:id", function(req, res) {
+        // Use the article id to find and update it's saved property to false
+        db.Article.delete({ "_id": req.params.id }, { "saved": false, "notes": [] })
+        // Execute the above query
+        .exec(function(err, doc) {
+            // Log any errors
+            if (err) {
+                console.log(err);
+            }
+            // Log result
+            else {
+                console.log("Saved: ", doc);
+            }
+        });
+    });
+
+    //clear unsaved articles
+    app.get('/clear', function(req, res) {
+        db.Article.remove({ saved: false}, function(err, doc) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('removed');
+            }
+    
+        });
+        res.redirect('/');
     });
       
 }
