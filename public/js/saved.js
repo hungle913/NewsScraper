@@ -20,7 +20,7 @@ $(document).ready(function() {
 
 	// Clear all Saved button will removed any articles saved. 
 	$(document).on("click", ".clearSaved", function() {
-		//run 
+		//Run Ajax request to delete all articles from the DB. 
 	  $.ajax({
 		url: "/clearSaved",
 		method: 'DELETE',
@@ -28,5 +28,10 @@ $(document).ready(function() {
 	  location.reload(true);
 	});
 
+	$(document).on("click", "#saveNote", function() {
+		$.ajax({
+			url:
+		})
+	})
 
 });
