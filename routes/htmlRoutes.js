@@ -27,7 +27,7 @@ module.exports = function(app) {
   });
 
   app.get("/saved", function (req, res) {
-    db.Article.find({ "saved": true })
+    db.Article.find({ "saved": true }).sort({'summary': -1})
     .then(function(dbArticle) {
       // console.log(dbArticle)
       var x = dbArticle.map(function(article) { 

@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$('.sidenav').sidenav();
+	$('.modal').modal();
 
 	// Save article button changes the saved property of the article model from false to true
 	$(document).on("click", "#unsaveArticle", function() {

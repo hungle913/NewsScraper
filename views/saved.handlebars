@@ -6,7 +6,7 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="/">Home</a></li>
         <li><a href="/saved">Saved Articles</a></li>
-        <li><a class="waves-effect waves-light btn-large clearSaved">!!!CLEAR ALL SAVED ARTICLES!!!</a></li>
+        <li><a class="waves-effect waves-teal btn-large clearSaved">!!!CLEAR ALL SAVED ARTICLES!!!</a></li>
       </ul>
     </div>
   </nav>
@@ -14,7 +14,7 @@
   <ul class="sidenav" id="mobile-demo">
     <li><a href="/">Home</a></li>
     <li><a href="/saved">Saved Articles</a></li>
-    <li><a class="waves-effect waves-light btn-large clearSaved">!!!CLEAR ALL SAVED ARTICLES!!!</a></li>
+    <li><a class="waves-effect waves-teal btn-large clearSaved">!!!CLEAR ALL SAVED ARTICLES!!!</a></li>
   </ul>
 
   <div class="row">
@@ -25,24 +25,26 @@
             <a class="list-new-article card-title" href='{{this.link}}' target="_blank">{{this.title}}</a>
             <p>{{this.summary}}</p>
             <br>
-            <button id="unsaveArticle" class="btn btn-danger float-right delete">UNSAVE ARTICLE</button>
+            <button id="unsaveArticle" class="btn waves-effect waves-teal float-right delete">UNSAVE ARTICLE</button>
 
-            <a class="waves-effect waves-light btn modal-trigger" href="#modal1">NOTES</a>
+            {{!-- Modal button --}}
+            <button data-target="modal1" class="waves-effect waves-teal btn modal-trigger">NOTES</button>
             <!-- Modal Structure -->
-            <div class="modal">
+            <div id="modal1" class="modal">
+              <textarea placeholder="New Note" rows="4" cols="60"></textarea>
+              <div class="modal-footer">
+                <button id="saveNote" class="btn waves-effect waves-teal float-right delete">Save Note</button>
+              </div>
               {{#each notes}}
                 <div class="modal-content">
                   <h4>Notes For Article: {{this.title}}</h4>
                   <p>{{this.notes}}</p>
                   <br>
-                  <button id="deleteNote" class="btn btn-danger float-right delete">Save Note</button>
+                  <button id="deleteNote" class="btn waves-effect waves-teal float-right delete">DELETE Note</button>
                 </div>
               {{/each}}
-              <textarea placeholder="New Note" rows="4" cols="60"></textarea>
-              <div class="modal-footer">
-                <button id="saveNote" class="btn btn-danger float-right delete">Save Note</button>
-              </div>
             </div>
+            
           </div>
           <hr>
         {{/each}}
