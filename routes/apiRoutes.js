@@ -102,5 +102,56 @@ module.exports = function(app) {
       }
     });
   });
+
+  // This will get the articles we scraped from the mongoDB
+  app.get("/articles", function(req, res) {
+    // Grab every doc in the Articles array
+    db.Article.find({})
+    // Execute the above query
+    .exec(function(err, results) {
+      // Log any errors
+      if (err) {
+        console.log(error);
+      }
+      // Or send the doc to the browser as a json object
+      else {
+      res.json(results);
+      }
+    });
+  });
+
+  //add note
+  app.post("/notes/:id", function (req, res) {
+    // Create a new note and pass the req.body to the entry
+    var newNote = new Note({
+      body: req.body.text,
+      article: req.params.id
+    });
+    console.log(req.body)
+    // And save the new note the db
+    newNote.save(function (error, note) {
+      // Log any errors
+      if (error) {
+        console.log(error);
+      }
+      // Otherwise
+      else {
+        // Use the article id to find and update it's comment
+        Article.findOneAndUpdate({ "_id": req.params.id }, { $push: { "notes": note } })
+        // Execute the above query
+        .exec(function (err) {
+          // Log any errors
+          if (err) {
+            console.log(err);
+            res.send(err);
+          }
+          else {
+            //Send the note to the browser
+            res.send(note);
+          }
+        });
+      }
+    });
+  });
       
 }
