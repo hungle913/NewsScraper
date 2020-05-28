@@ -27,7 +27,16 @@ $(document).ready(function() {
 	  location.reload(true);
 	});
 
+	// Scrape new articles. 
+	$(document).on("click", ".scrapeArticle", function() {
+		//run 
+	  $.ajax({
+		url: "/scrape",
+		method: 'GET',
+		success: function(reload) {
+			location.reload(true);
+		}
+	  })
 
-
-
+	});
 });
