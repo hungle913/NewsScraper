@@ -121,37 +121,20 @@ module.exports = function(app) {
   });
 
   //add note
-  app.post("/notes/:id", function (req, res) {
+  app.post("/articles/:id", function (req, res) {
     // Create a new note and pass the req.body to the entry
-    var newNote = new Note({
-      body: req.body.text,
-      article: req.params.id
-    });
-    console.log(req.body)
-    // And save the new note the db
-    newNote.save(function (error, note) {
-      // Log any errors
-      if (error) {
-        console.log(error);
-      }
-      // Otherwise
-      else {
-        // Use the article id to find and update it's comment
-        Article.findOneAndUpdate({ "_id": req.params.id }, { $push: { "notes": note } })
-        // Execute the above query
-        .exec(function (err) {
-          // Log any errors
-          if (err) {
-            console.log(err);
-            res.send(err);
-          }
-          else {
-            //Send the note to the browser
-            res.send(note);
-          }
-        });
-      }
-    });
+    db.Note.create(req.body).then(function(dbNote) {
+      return db.Article.findOneAndUpdate({
+        _id: req.params.id
+      }, {
+        notes: dbNote._id
+      }, {
+        new: true
+      });
+    }).then(function (dbArticle) {
+      res.json(dbArticle);
+    }).catch(function (err) {
+      res.json(err);
+    })
   });
-      
 }

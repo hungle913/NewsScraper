@@ -28,16 +28,17 @@
             <button id="unsaveArticle" class="btn waves-effect waves-teal float-right delete">UNSAVE ARTICLE</button>
 
             {{!-- Modal button --}}
-            <button data-target="modal1" class="waves-effect waves-teal btn modal-trigger">NOTES</button>
+            <button id="modalButton" data-target="modal1" class="waves-effect waves-teal btn modal-trigger">NOTES</button>
             <!-- Modal Structure -->
             <div id="modal1" class="modal">
-              <textarea placeholder="New Note" rows="4" cols="60"></textarea>
+              <h4 class="teal-text">Article Notes</h4>
+              <h5 class="teal-text">{{this.title}}</h3>
+              <textarea id="noteBody" placeholder="New Note" rows="4" cols="60"></textarea>
               <div class="modal-footer">
                 <button id="saveNote" class="btn waves-effect waves-teal float-right delete">Save Note</button>
               </div>
               {{#each notes}}
                 <div class="modal-content">
-                  <h4>Notes For Article: {{this.title}}</h4>
                   <p>{{this.notes}}</p>
                   <br>
                   <button id="deleteNote" class="btn waves-effect waves-teal float-right delete">DELETE Note</button>

@@ -23,15 +23,47 @@ $(document).ready(function() {
 		//Run Ajax request to delete all articles from the DB. 
 	  $.ajax({
 		url: "/clearSaved",
-		method: 'DELETE',
+		method: 'DELETE'
 	  })
 	  location.reload(true);
 	});
 
-	$(document).on("click", "#saveNote", function() {
+	//Open modal and display notes
+	$(document).on("click", "#modalButton", function() {
+		// Get article by article ID
+		let articleID = $(this).parent().parent().parent().attr("data-id");
+		//Make an ajax call for the Article
 		$.ajax({
-			url:
+			method: "GET",
+			url: "/unSave/" + articleID
+		}).done(function(data) {
+
 		})
+
+
+	});
+
+	//Save note
+	$(document).on("click", "#saveNote", function() {
+		//Grab ID associated with article
+		let articleID = $(this).parent().parent().parent().attr("data-id");
+		console.log("articleID is : " + articleID);
+		//Grab text from body
+		let body = $("#noteBody").val().trim();
+		console.log("note is : " + body);
+		//Make Ajax call
+		$.ajax({
+			url: "/articles/" + articleID,
+			method: "POST",
+			data: {
+				// Value taken from body input
+				body: body
+			}
+		}).then(function(data) {
+			console.log(data);
+			$("#noteBody").val("")
+		}) 
+		// location.reload(true);
 	})
 
 });
