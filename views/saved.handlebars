@@ -37,9 +37,9 @@
               <div class="modal-footer">
                 <button id="saveNote" class="btn waves-effect waves-teal float-right delete">Save Note</button>
               </div>
-              {{#each notes}}
+              {{#each note}}
                 <div class="modal-content">
-                  <p>{{this.notes}}</p>
+                  <p>{{this.body}}</p>
                   <br>
                   <button id="deleteNote" class="btn waves-effect waves-teal float-right delete">DELETE Note</button>
                 </div>
