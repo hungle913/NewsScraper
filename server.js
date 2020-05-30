@@ -35,9 +35,12 @@ app.engine("handlebars", exphbs({
 }));
 app.set("view engine", "handlebars");
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nprScraper";
+// Connect to the Mongo DB
+let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nprScraper";
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true
+});
 
-mongoose.connect(MONGODB_URI);
 
 // Routes
 require("./routes/apiRoutes")(app);
