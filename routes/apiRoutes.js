@@ -1,4 +1,4 @@
-const db = require("../models");
+var db = require("../models");
 const axios = require("axios");
 const cheerio = require("cheerio");
 
