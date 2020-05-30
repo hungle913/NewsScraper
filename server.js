@@ -19,7 +19,7 @@ const app = express();
 
 // Use body parser
 app.use(bodyParser.urlencoded({
-    extended: false
+  extended: false
 }));
 
 // Make public a static dir
@@ -30,7 +30,7 @@ app.use(express.static("public"));
 const exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs({
-    defaultLayout: "main",
+  defaultLayout: "main",
 }));
 app.set("view engine", "handlebars");
 
