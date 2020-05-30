@@ -31,16 +31,26 @@ $(document).ready(function() {
 	//Open modal and display notes
 	$(document).on("click", "#modalButton", function() {
 		// Get article by article ID
-		let articleID = $(this).parent().parent().parent().attr("data-id");
+		let articleID = $(this).parent().attr("data-id");
+		// console.log("articleID is : " + articleID)
 		//Make an ajax call for the Article
 		$.ajax({
 			method: "GET",
-			url: "/unSave/" + articleID
-		}).done(function(data) {
+			url: "/notes/" + articleID
+		}).then(function(data) {
+			console.log("articleID is : " + articleID)
+			$("#allNotes").empty();
+			$.ajax({
+				method: "GET",
+				url: "/articlenotes/" + articleID
+			}).then(function(data) {
+				//loop through all the notes data and append to page
+				for (i = 0; i < data.length; i++) {
+					$("#allNotes").append("<div class='modal-content card-content white-text'><p>" + data[i].body + "</p><br><button id='deleteNote' class='btn waves-effect waves-teal float-right delete'>DELETE Note</button></div>");
+				}
+			})
 
 		})
-
-
 	});
 
 	//Save note
@@ -57,10 +67,12 @@ $(document).ready(function() {
 			method: "POST",
 			data: {
 				// Value taken from body input
-				body: body
+				body: body,
+				article: articleID
 			}
 		}).then(function(data) {
-			console.log(data);
+			console.log(data)
+			console.log("Saved note data is :" + data);
 			$("#noteBody").val("")
 		}) 
 		// location.reload(true);

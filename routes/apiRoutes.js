@@ -130,11 +130,51 @@ module.exports = function(app) {
         notes: dbNote._id
       }, {
         new: true
+      }, {
+        $push: { "notes": note}
       });
     }).then(function (dbArticle) {
       res.json(dbArticle);
+      console.log("note saved successful")
     }).catch(function (err) {
       res.json(err);
     })
   });
+
+  //open notes Modal and provides article title using article ID
+  app.get("/notes/:id", function(req, res) {
+    // Grab every doc in the Articles array
+    db.Article.find({"_id": req.params.id})
+    // Execute the above query
+    .exec(function(err, results) {
+      // Log any errors
+      if (err) {
+        console.log(error);
+      }
+      // Or send the doc to the browser as a json object
+      else {
+      res.json(results);
+      }
+    });
+  });
+
+  //find notes using article ID association to display notes in modal
+  app.get("/articlenotes/:id", function(req, res) {
+    // Grab every doc in the Articles array
+    db.Note.find({"article": req.params.id})
+    .then(function(dbNote) {
+      // console.log("dbNote is :" + dbNote)
+      var y = dbNote.map(function(note) {
+        // console.log("note is : " + note)
+        return {
+          body: note.body,
+          article: note.article
+        };
+      })
+      // console.log(y)
+      // If we were able to successfully find notes, send them back to the client
+      res.json(y)
+    })
+  });
+
 }

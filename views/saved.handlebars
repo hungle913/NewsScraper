@@ -26,7 +26,6 @@
             <p>{{this.summary}}</p>
             <br>
             <button id="unsaveArticle" class="btn waves-effect waves-teal float-right delete">UNSAVE ARTICLE</button>
-
             {{!-- Modal button --}}
             <button id="modalButton" data-target="modal1" class="waves-effect waves-teal btn modal-trigger">NOTES</button>
             <!-- Modal Structure -->
@@ -37,15 +36,8 @@
               <div class="modal-footer">
                 <button id="saveNote" class="btn waves-effect waves-teal float-right delete">Save Note</button>
               </div>
-              {{#each note}}
-                <div class="modal-content">
-                  <p>{{this.body}}</p>
-                  <br>
-                  <button id="deleteNote" class="btn waves-effect waves-teal float-right delete">DELETE Note</button>
-                </div>
-              {{/each}}
+              <div id="allNotes" class="card blue-grey darken-1"></div>
             </div>
-            
           </div>
           <hr>
         {{/each}}
