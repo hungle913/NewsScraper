@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 
 //require all Models
-let db = require("./models")
+let db = require("./models");
 
 // Scraping tools
 const axios = require("axios");
