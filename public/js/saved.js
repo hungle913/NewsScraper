@@ -47,7 +47,7 @@ $(document).ready(function() {
 				// console.log(data)
 				//loop through all the notes data and append to page
 				for (i = 0; i < data.length; i++) {
-					$("#allNotes").append("<div data-id=" + data[i].id + " class='modal-content card-content white-text'><p>" + data[i].body + "</p><br><button id='deleteNote' class='btn waves-effect waves-teal float-right delete'>DELETE Note</button></div>");
+					$("#allNotes").append("<div data-id=" + data[i].id + " class='modal-content card-content white-text'><h5>" + data[i].body + "</h5><br><button id='deleteNote' class='btn waves-effect waves-teal float-right delete'>DELETE Note</button></div>");
 				}
 			})
 		})
@@ -80,7 +80,7 @@ $(document).ready(function() {
 			}).then(function(data) {
 				//loop through all the notes data and append to page
 				for (i = 0; i < data.length; i++) {
-					$("#allNotes").append("<div data-id=" + data[i].id + " class='modal-content card-content white-text'><p>" + data[i].body + "</p><br><button id='deleteNote' class='btn waves-effect waves-teal float-right delete'>DELETE Note</button></div>");
+					$("#allNotes").append("<div data-id=" + data[i].id + " class='modal-content card-content white-text'><h5>" + data[i].body + "</h5><br><button id='deleteNote' class='btn waves-effect waves-teal float-right delete'>DELETE Note</button></div>");
 				}
 			})
 		}) 
@@ -109,7 +109,7 @@ $(document).ready(function() {
 				// console.log(data)
 				//loop through all the notes data and append to page
 				for (i = 0; i < data.length; i++) {
-					$("#allNotes").append("<div data-id=" + data[i].id + " class='modal-content card-content white-text'><p>" + data[i].body + "</p><br><button id='deleteNote' class='btn waves-effect waves-teal float-right delete'>DELETE Note</button></div>");
+					$("#allNotes").append("<div data-id=" + data[i].id + " class='modal-content card-content white-text'><h5>" + data[i].body + "</h5><br><button id='deleteNote' class='btn waves-effect waves-teal float-right delete'>DELETE Note</button></div>");
 				}
 				// console.log("this completes for loop after 2nd ajax call")
 			})
