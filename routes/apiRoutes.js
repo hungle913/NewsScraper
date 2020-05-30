@@ -135,7 +135,7 @@ module.exports = function(app) {
       });
     }).then(function (dbArticle) {
       res.json(dbArticle);
-      console.log("note saved successful")
+      // console.log("note saved successful")
     }).catch(function (err) {
       res.json(err);
     })
@@ -163,10 +163,12 @@ module.exports = function(app) {
     // Grab every doc in the Articles array
     db.Note.find({"article": req.params.id})
     .then(function(dbNote) {
+      // console.log(dbNote)
       // console.log("dbNote is :" + dbNote)
       var y = dbNote.map(function(note) {
         // console.log("note is : " + note)
         return {
+          id: note._id,
           body: note.body,
           article: note.article
         };
@@ -174,6 +176,17 @@ module.exports = function(app) {
       // console.log(y)
       // If we were able to successfully find notes, send them back to the client
       res.json(y)
+    })
+  });
+
+  //find notes using article ID association to delete notes
+  app.delete("/deletenotes/:id", function(req, res) {
+    db.Note.findOneAndDelete({"_id": req.params.id})
+    .then(function (dbArticle) {
+      res.json(dbArticle);
+      // console.log("note delete successful")
+    }).catch(function (err) {
+      res.json(err);
     })
   });
 

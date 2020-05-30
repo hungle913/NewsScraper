@@ -38,18 +38,18 @@ $(document).ready(function() {
 			method: "GET",
 			url: "/notes/" + articleID
 		}).then(function(data) {
-			console.log("articleID is : " + articleID)
+			// console.log("articleID is : " + articleID)
 			$("#allNotes").empty();
 			$.ajax({
 				method: "GET",
 				url: "/articlenotes/" + articleID
 			}).then(function(data) {
+				// console.log(data)
 				//loop through all the notes data and append to page
 				for (i = 0; i < data.length; i++) {
-					$("#allNotes").append("<div class='modal-content card-content white-text'><p>" + data[i].body + "</p><br><button id='deleteNote' class='btn waves-effect waves-teal float-right delete'>DELETE Note</button></div>");
+					$("#allNotes").append("<div data-id=" + data[i].id + " class='modal-content card-content white-text'><p>" + data[i].body + "</p><br><button id='deleteNote' class='btn waves-effect waves-teal float-right delete'>DELETE Note</button></div>");
 				}
 			})
-
 		})
 	});
 
@@ -57,10 +57,10 @@ $(document).ready(function() {
 	$(document).on("click", "#saveNote", function() {
 		//Grab ID associated with article
 		let articleID = $(this).parent().parent().parent().attr("data-id");
-		console.log("articleID is : " + articleID);
+		// console.log("articleID is : " + articleID);
 		//Grab text from body
 		let body = $("#noteBody").val().trim();
-		console.log("note is : " + body);
+		// console.log("note is : " + body);
 		//Make Ajax call
 		$.ajax({
 			url: "/articles/" + articleID,
@@ -71,11 +71,48 @@ $(document).ready(function() {
 				article: articleID
 			}
 		}).then(function(data) {
-			console.log(data)
-			console.log("Saved note data is :" + data);
 			$("#noteBody").val("")
+			// console.log("articleID is : " + articleID)
+			$("#allNotes").empty();
+			$.ajax({
+				method: "GET",
+				url: "/articlenotes/" + articleID
+			}).then(function(data) {
+				//loop through all the notes data and append to page
+				for (i = 0; i < data.length; i++) {
+					$("#allNotes").append("<div data-id=" + data[i].id + " class='modal-content card-content white-text'><p>" + data[i].body + "</p><br><button id='deleteNote' class='btn waves-effect waves-teal float-right delete'>DELETE Note</button></div>");
+				}
+			})
 		}) 
-		// location.reload(true);
 	})
 
+	//delete note
+	$(document).on("click", "#deleteNote", function() {
+		//Grab ID associated with article
+		let noteID = $(this).parent().attr("data-id");
+		let articleID = $(this).parent().parent().parent().parent().attr("data-id");
+		// console.log("articleID is : " + articleID)
+		// console.log("noteID is : " + noteID);
+		//Make Ajax call
+		$.ajax({
+			url: "/deletenotes/" + noteID,
+			method: "DELETE",
+		}).then(function(data) {
+			// console.log("this reaches next ajax after delete")
+			// console.log("articleID is : " + articleID)
+			$("#allNotes").empty();
+			$.ajax({
+				method: "GET",
+				url: "/articlenotes/" + articleID
+			}).then(function(data) {
+				// console.log("this passes ajax call after delete")
+				// console.log(data)
+				//loop through all the notes data and append to page
+				for (i = 0; i < data.length; i++) {
+					$("#allNotes").append("<div data-id=" + data[i].id + " class='modal-content card-content white-text'><p>" + data[i].body + "</p><br><button id='deleteNote' class='btn waves-effect waves-teal float-right delete'>DELETE Note</button></div>");
+				}
+				// console.log("this completes for loop after 2nd ajax call")
+			})
+		}) 
+	})
 });
