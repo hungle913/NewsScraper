@@ -36,10 +36,7 @@ app.set("view engine", "handlebars");
 
 // Connect to the Mongo DB
 let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nprScraper";
-mongoose.connect(MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose.connect(MONGODB_URI);
 
 
 // Routes
