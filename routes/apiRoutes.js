@@ -66,7 +66,7 @@ module.exports = function(app) {
       else {
         console.log("Deleted: ", doc);
       }
-      });
+    });
   });
 
   //clear unsaved articles
@@ -189,5 +189,4 @@ module.exports = function(app) {
       res.json(err);
     })
   });
-
 }
