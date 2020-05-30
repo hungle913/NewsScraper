@@ -161,7 +161,7 @@ module.exports = function(app) {
   //find notes using article ID association to display notes in modal
   app.get("/articlenotes/:id", function(req, res) {
     // Grab every doc in the Articles array
-    db.Note.find({"article": req.params.id})
+    db.Note.find({"article": req.params.id}).sort({'_id': -1})
     .then(function(dbNote) {
       // console.log(dbNote)
       // console.log("dbNote is :" + dbNote)
