@@ -2,6 +2,7 @@ var db = require("../models");
 
 module.exports = function(app) {
 
+  //route to load home page
   app.get("/", function (req, res) {
     db.Article.find({ "saved": false }).sort({'summary': -1})
     .then(function(dbArticle) {
@@ -25,6 +26,7 @@ module.exports = function(app) {
     });
   });
 
+  //route to load saved articles page
   app.get("/saved", function (req, res) {
     db.Article.find({ "saved": true }).sort({'summary': -1})
     .then(function(dbArticle) {
