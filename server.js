@@ -4,9 +4,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path");
 
-//Models
-const Note = require("./models/Note.js");
-const Article = require("./models/Article.js");
+//require all Models
+let db = require("./models")
 
 // Scraping tools
 const axios = require("axios");
